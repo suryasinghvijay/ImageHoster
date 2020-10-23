@@ -158,8 +158,8 @@ public class ImageController {
             imageService.deleteImage(imageId);
            return "redirect:/images";
         } else {
-            String error = "Only the owner of the image can edit the image";
-            model.addAttribute("editError", error);
+            String error = "Only the owner of the image can delete the image";
+            model.addAttribute("deleteError", error);
             model.addAttribute("image", image);
             model.addAttribute("tags", image.getTags());
             return "/images/image";
