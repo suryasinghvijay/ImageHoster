@@ -1,13 +1,31 @@
 package ImageHoster.model;
 
-import java.time.LocalDate;
-import java.util.Date;
+import org.springframework.context.annotation.Primary;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "comments")
 public class Comment {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
+    private Integer id;
+
+    @Column(name = "text", columnDefinition = "TEXT")
     private String text;
+
+    @Column(name = "createdDate")
     private LocalDate createdDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "users_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "images_id")
     private Image Image;
 
     public Comment() {
@@ -21,11 +39,11 @@ public class Comment {
         Image = image;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,7 +71,7 @@ public class Comment {
         this.user = user;
     }
 
-    public ImageHoster.model.Image getImage() {
+    public Image getImage() {
         return Image;
     }
 
